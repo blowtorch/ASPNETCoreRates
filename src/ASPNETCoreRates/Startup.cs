@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using DataAccess.Database;
+using IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -17,7 +18,7 @@ namespace ASPNETCoreRC2Angular2Demo
 {
     public class Startup
     {
-        private Container container = new Container();
+        private readonly Container container = new Container();
         //private CrossCuttingConcerns.Bootstrap bootstrapper;
         
         public IConfigurationRoot Configuration { get; }
@@ -27,13 +28,8 @@ namespace ASPNETCoreRC2Angular2Demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            //bootstrapper = new CrossCuttingConcerns.Bootstrap(services, container);
             services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));
             services.AddSingleton<IViewComponentActivator>(new SimpleInjectorViewComponentActivator(container));
-            //var connection = @"Server=(localdb)\mssqllocaldb;Database=RatesDb;Trusted_Connection=True;";
-            //services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
-            //var databaseInitializer = new DatabaseInitializer();
-            //databaseInitializer.Initialize(services);
         }
 
         public Startup(IHostingEnvironment env)
@@ -74,25 +70,8 @@ namespace ASPNETCoreRC2Angular2Demo
             container.RegisterMvcControllers(app);
             container.RegisterMvcViewComponents(app);
 
-            // Add application services. For instance:
-            //container.Register<IUserRepository, SqlUserRepository>(Lifestyle.Scoped);
-
-            //Register Database
-            //var connection = @"Server=(localdb)\mssqllocaldb;Database=RatesDb;Trusted_Connection=True;";
-            //var options = new DbContextOptionsBuilder<DataContext>().UseSqlServer(connection).Options;
-            //container.Register<DbContextOptions<DataContext>>(() => new DbContextOptionsBuilder<DataContext>().UseSqlServer(connection).Options, Lifestyle.Scoped);
-            //container.Register<IDataContext>(() => new DataContext(new DbContextOptionsBuilder<DataContext>().UseSqlServer(connection).Options), Lifestyle.Scoped);
-            //container.RegisterSingleton<DbContextOptionsBuilder<DataContext>>( new DbContextOptionsBuilder<DataContext>().UseSqlServer(connection));
             //Register repositories
-            container.Register<IDataContextFactory, DataContextFactory>(Lifestyle.Scoped);
-            container.Register<IRatesRepository, RatesRepository>(Lifestyle.Scoped);
-            //container.Register<IDatabaseInitializer, DatabaseInitializer>();
-            //container.Register<IDataContext, DataContext>();
-
-            // Cross-wire ASP.NET services (if any). For instance:
-            //container.RegisterSingleton(app.ApplicationServices.GetService<ILoggerFactory>());
-            // NOTE: Prevent cross-wired instances as much as possible.
-            // See: https://simpleinjector.org/blog/2016/07/
+            Bootstrap.Register(container);
         }
     }
 }

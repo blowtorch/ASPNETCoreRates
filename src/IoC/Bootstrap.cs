@@ -9,20 +9,12 @@ using Repository;
 
 namespace IoC
 {
-    public class Bootstrap
+    public static class Bootstrap
     {
-        public Bootstrap(IServiceCollection services, Container container)
+        public static void Register(Container container)
         {
-            //Register web
-            services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));
-            services.AddSingleton<IViewComponentActivator>(new SimpleInjectorViewComponentActivator(container));
-            
-            //Register Database
-            container.Register<IDataContext, DataContext>();
-
-            //Register repositories
-            container.Register<IRatesRepository, RatesRepository>();
-
+            container.Register<IDataContextFactory, DataContextFactory>(Lifestyle.Scoped);
+            container.Register<IRatesRepository, RatesRepository>(Lifestyle.Scoped);
         }
     }
 }
