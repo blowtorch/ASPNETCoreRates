@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var DataService_1 = require('../services/DataService');
+var Rate_1 = require("../models/Rate");
+;
 var HomeComponent = (function () {
     function HomeComponent(_dataService) {
         this._dataService = _dataService;
-        this.message = "Hello from HomeComponent constructor";
+        this.newRate = new Rate_1.Rate();
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -24,6 +26,12 @@ var HomeComponent = (function () {
     };
     HomeComponent.prototype.selectRate = function (rate) {
         alert("You selected:" + rate.toString());
+    };
+    HomeComponent.prototype.setNewRateValue = function (value) {
+        this.newRate.rate = value;
+    };
+    HomeComponent.prototype.addRate = function () {
+        //TODO: Save new rate
     };
     HomeComponent = __decorate([
         core_1.Component({

@@ -5,6 +5,21 @@
             <br/>
             <br/>
             <h1>Rates</h1>
+            <form>
+                <label for="inputGroup">Add rate</label>
+                <div id="inputGroup" class="btn-group">
+                    <input type="text" id="txtRate" value="{{newRate.description}}"/>
+                    <span class="">
+                        <button type="button" class="btn-default" (click) ="setNewRateValue(1)">1</button>
+                        <button type="button" class="btn-default" (click) ="setNewRateValue(2)">2</button>
+                        <button type="button" class="btn-default active" (click) ="setNewRateValue(3)">3</button>
+                        <button type="button" class="btn-default" (click) ="setNewRateValue(4)">4</button>
+                        <button type="button" class="btn-default" (click) ="setNewRateValue(5)">5</button>
+                        <button type="submit" class="btn-success" (click)="addRate()">Submit</button>
+                    </span>
+                </div>
+            </form>
+            <hr/>
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let rate of rates">
                     <div class="btn-group">

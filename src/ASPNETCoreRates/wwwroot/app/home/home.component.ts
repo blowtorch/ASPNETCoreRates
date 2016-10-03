@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { DataService } from '../services/DataService';
-import Model = require("../models/Rate");
+import { Rate }  from "../models/Rate");
 
 @Component({
     selector: 'home',
@@ -14,9 +14,10 @@ export class HomeComponent implements OnInit {
 
     public message: string;
     public rates: any[];
+    public newRate: Rate;
 
-    constructor(private _dataService : DataService) {
-        this.message = "Hello from HomeComponent constructor";
+    constructor(private _dataService: DataService) {
+        this.newRate = new Rate();
     }
 
     ngOnInit() {
@@ -30,5 +31,13 @@ export class HomeComponent implements OnInit {
 
     selectRate(rate: number) {
         alert(`You selected:${rate.toString()}`);
+    }
+
+    setNewRateValue(value: number) {
+        this.newRate.rate = value;
+    }
+
+    addRate() {
+        //TODO: Save new rate
     }
 }
