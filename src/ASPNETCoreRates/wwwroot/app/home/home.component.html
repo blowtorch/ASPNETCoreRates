@@ -1,0 +1,25 @@
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-12">
+            <br/>
+            <br/>
+            <h1>Rates</h1>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let rate of rates">
+                    <div class="btn-group">
+                        {{rate.description}}
+                        <span class="">
+                            <button type="button" class="btn-default" [ngClass]="{'active': rate.rate == 1}" (click)=selectRate(1)>1</button>
+                            <button type="button" class="btn-default" [ngClass]="{'active': rate.rate == 2}" (click)=selectRate(2)>2</button>
+                            <button type="button" class="btn-default" [ngClass]="{'active': rate.rate == 3}" (click)=selectRate(3)>3</button>
+                            <button type="button" class="btn-default" [ngClass]="{'active': rate.rate == 4}" (click)=selectRate(4)>4</button>
+                            <button type="button" class="btn-default" [ngClass]="{'active': rate.rate == 5}" (click)=selectRate(5)>5</button>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /container -->
