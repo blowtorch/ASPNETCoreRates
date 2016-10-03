@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { DataService } from '../services/DataService';
-import { Rate }  from "../models/Rate");
+import { Rate }  from "../models/Rate";
 
 @Component({
     selector: 'home',

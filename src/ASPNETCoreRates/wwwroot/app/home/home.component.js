@@ -12,7 +12,6 @@ var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var DataService_1 = require('../services/DataService');
 var Rate_1 = require("../models/Rate");
-;
 var HomeComponent = (function () {
     function HomeComponent(_dataService) {
         this._dataService = _dataService;
